@@ -15,20 +15,27 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private MaterialButton loginButton;
-    private TextView registerButton;
     private EditText emailText, passwordText;
     private FirebaseAuth mAuth;
+    private DatabaseReference databaseReference;
+    private String userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        loginButton = findViewById(R.id.loginBtn);
-        registerButton = findViewById(R.id.regBtn);
+        MaterialButton loginButton = findViewById(R.id.loginBtn);
+        TextView registerButton = findViewById(R.id.regBtn);
         loginButton.setOnClickListener(this);
         registerButton.setOnClickListener(this);
         emailText = findViewById(R.id.emailTxt);
@@ -55,11 +62,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            startActivity(new Intent(MainActivity.this, ChangeTypeActivity.class));
+                            //startActivity(new Intent(MainActivity.this, ChangeTypeActivity.class));
+                            loadActivity();
                         }
                         else{
                             Toast.makeText(MainActivity.this, "Что-то пошло не так:(", Toast.LENGTH_LONG).show();
                         }
+                    }
+                });
+    }
+
+    private void loadActivity(){
+        databaseReference = FirebaseDatabase.getInstance().getReference("user");
+        userID = mAuth.getCurrentUser().getUid();
+        databaseReference.child(userID)
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User currentUser = snapshot.getValue(User.class);
+                        if(currentUser != null){
+                            Toast.makeText(MainActivity.this, currentUser.name, Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
                     }
                 });
     }
