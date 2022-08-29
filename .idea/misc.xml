@@ -3,8 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Alexander/AndroidStudioProjects/NewplayerJava/app/src/main/res/layout/activity_change_type.xml" value="0.25729166666666664" />
         <entry key="..\:/Users/Alexander/AndroidStudioProjects/NewplayerJava/app/src/main/res/layout/activity_main.xml" value="0.33" />
-        <entry key="..\:/Users/Alexander/AndroidStudioProjects/NewplayerJava/app/src/main/res/layout/activity_user_registration.xml" value="0.25" />
+        <entry key="..\:/Users/Alexander/AndroidStudioProjects/NewplayerJava/app/src/main/res/layout/activity_user_registration.xml" value="0.33" />
       </map>
     </option>
   </component>

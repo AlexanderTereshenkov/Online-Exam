@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -18,7 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private MaterialButton loginButton;
-    private MaterialButton registerButton;
+    private TextView registerButton;
     private EditText emailText, passwordText;
     private FirebaseAuth mAuth;
     @Override
@@ -52,7 +54,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-
+                        if(task.isSuccessful()){
+                            startActivity(new Intent(MainActivity.this, ChangeTypeActivity.class));
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this, "Что-то пошло не так:(", Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
     }

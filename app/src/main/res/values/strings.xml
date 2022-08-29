@@ -1,10 +1,10 @@
 <resources>
     <string name="app_name">New player Java</string>
     <string name="online_exam">Online Exam</string>
-    <string name="email_hint">Email</string>
-    <string name="password_hint">Enter password</string>
-    <string name="login">Login</string>
-    <string name="register">Register</string>
-    <string name="name">Name</string>
-    <string name="are_u_a_teacher">Are u a teacher?</string>
+    <string name="email_hint">Адрес эл.почты</string>
+    <string name="password_hint">Введите пароль</string>
+    <string name="login">Войти</string>
+    <string name="register">Новый пользователь? Зарегистрируйтесь!</string>
+    <string name="name">Имя</string>
+    <string name="are_u_a_teacher">Вы являетесь учителем?</string>
 </resources>

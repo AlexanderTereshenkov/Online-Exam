@@ -1,9 +1,11 @@
 package com.example.newplayerjava;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,6 +56,8 @@ public class UserRegistration extends AppCompatActivity {
                             FirebaseDatabase.getInstance().getReference("user")
                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user);
+                            Toast.makeText(UserRegistration.this, "Успешно!", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(UserRegistration.this, MainActivity.class));
                         }
                     }
                 });
